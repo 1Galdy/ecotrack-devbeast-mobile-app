@@ -1,50 +1,89 @@
-# Welcome to your Expo app 👋
+# 🏗 Architecture du Projet
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Ce projet suit une architecture **Feature-Based modulaire**, inspirée des standards utilisés en entreprise (Clean Architecture simplifiée).
 
-## Get started
+L’objectif :
 
-1. Install dependencies
+* Code lisible
+* Séparation claire des responsabilités
+* Scalabilité
+* Travail collaboratif simplifié
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+# 📱 Mobile — React Native (Expo)
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+src/
+├── app/
+├── features/
+├── shared/
+├── services/
+├── store/
+├── theme/
+├── types/
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 📁 app/
 
-## Learn more
+Structure de navigation (Expo Router).
 
-To learn more about developing your project with Expo, look at the following resources:
+---
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 📁 features/
 
-## Join the community
+Organisation par domaine métier.
 
-Join our community of developers creating universal apps.
+Structure interne :
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```
+feature-name/
+├── screens/
+├── components/
+├── hooks/
+├── services/
+├── schemas/
+└── types.ts
+```
+
+* `screens/` → pages complètes
+* `components/` → composants internes
+* `hooks/` → logique métier
+* `services/` → appels API
+* `schemas/` → validation
+
+---
+
+## 📁 shared/
+
+Composants UI globaux et design system.
+
+---
+
+## 📁 services/
+
+Client API centralisé.
+
+---
+
+## 📁 store/
+
+State global.
+
+---
+
+## 📁 theme/
+
+Couleurs, typographie, spacing.
+
+---
+
+# 🎯 Règle d’or du projet
+
+* Une feature = un dossier
+* Pas de logique métier dans `app/`
+* Le code réutilisable va dans `shared/`
+* Les appels API vont dans `services/`
+* La validation va dans `schemas/`
+
+---

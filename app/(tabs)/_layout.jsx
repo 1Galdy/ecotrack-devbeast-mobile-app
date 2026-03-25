@@ -1,6 +1,7 @@
 // app/(tabs)/_layout.jsx
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs, usePathname, useRouter } from "expo-router";
+import { StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 
@@ -40,8 +41,17 @@ export default function TabsLayout() {
         options={{
           title: "Scanner",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="qr-code" size={size} color={color} />
+            <View style={styles.qrButton}>
+              <Ionicons name="qr-code" size={size} color={color} />
+            </View>
           ),
+          tabBarItemStyle: {
+            // On élève uniquement via translateY pour ne pas
+            // comprimer l'espace du label sur Android
+            transform: [{ translateY: -16 }],
+          },
+          // tabBarActiveTintColor: "#fff",
+          // tabBarInactiveTintColor: "#fff",
         }}
       />
 
@@ -86,3 +96,20 @@ export default function TabsLayout() {
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  qrButton: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,        // ← moitié de width/height = cercle parfait
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",     // ombre pour un effet surélevé
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 6,            // ombre sur Android
+    marginBottom: 40,
+  },
+})

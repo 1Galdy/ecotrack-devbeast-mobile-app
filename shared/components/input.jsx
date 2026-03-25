@@ -7,6 +7,7 @@ export default function Input({
   placeholder,
   type = "text",
   style,
+  ...props
 }) {
   const getKeyboardType = () => {
     switch (type) {
@@ -31,7 +32,9 @@ export default function Input({
       placeholder={placeholder}
       keyboardType={getKeyboardType()}
       secureTextEntry={isPassword}
+      placeholderTextColor="#000"
       autoCapitalize={type === "email" ? "none" : "sentences"}
+      {...props}
     />
   );
 }
@@ -39,7 +42,7 @@ export default function Input({
 const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
-    borderColor: "#ddd",
+    borderColor: "#747474",
     borderRadius: 12,
     padding: 15,
     marginBottom: 10,
